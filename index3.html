@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AJAX Test text 3</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  </head>
+  <body>
+    
+    <form>
+      <input type="text">
+      <button>Ladda Data</button>
+    </form>
+    
+    <tabel>
+      <tr>
+        <th id="nWords">N Of Words</th>
+        <th id="words">Words</th>
+      </tr>
+      <td>
+      
+      </td>
+    </tabel>
+    
+    
+    
+    <script type="text/javascript">
+      
+      var request = new XMLHttpRequest();
+      
+      var handler = function(){
+        console.log("readyState: " + request.readyState);
+        console.log("status: " + request.status);
+        if(request.readyState===4 && request.status===200){
+          $("tabel").append("<tr><td>" + input + "</td><td>" + request.responseText + "</td></tr>");
+        };
+      };
+      
+      
+      $(document).ready(function(){
+        
+        $('button').click(function(event){
+          event.preventDefault();
+          input = $("input").val();
+          
+          request.onreadystatechange = handler;
+		  request.open("GET", "http://mardby.se/AJK15G/lorem_text_random.php?numberOfWords=" + input);
+		  request.send();
+          $("input").val("");
+          
+        });
+        
+      });
+        
+
+      
+           
+    </script>
+  </body>
+</html>

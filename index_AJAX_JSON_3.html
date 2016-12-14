@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AJAX JSON Övning 3</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript">
+      
+      $(document).ready(function(){
+        
+          $("button").click(function(evt){
+            
+
+            var request = new XMLHttpRequest();
+            
+            var x = $("#numberOfDice").val();
+            
+            request.onreadystatechange = function(){
+              
+              if(request.readyState === 4 && request.status === 200) {
+               
+                var val = JSON.parse(request.response);
+
+              $("ul").append("<li>" + val + "</li>");
+                
+              }
+
+            }
+            request.open("GET", "http://mardby.se/AJK15G/dice_json_array.php?numberOfDice=" + x);
+            request.send();
+          });
+
+      });
+
+    </script>
+    <style type="text/css">
+	   th,td {
+			border: 1px solid lightgreen;
+		}
+      button {
+        width: 100px;
+      }
+	</style>
+  </head>
+  
+  <body>
+    
+    <input type="text" id="numberOfDice">
+    <button>Slå Tärningar</button>
+    
+    <ul>
+      
+    </ul>
+    
+  </body>
+</html>

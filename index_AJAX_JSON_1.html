@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AJAX JSON Övning 1</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript">
+      
+      $(document).ready(function(){
+        
+          $("button").click(function(evt){
+            evt.preventDefault();
+            var request = new XMLHttpRequest();
+            var x = $("input").val();
+            request.onreadystatechange = function() {
+              if(request.readyState===4 && request.status===200){
+                
+                var arr = JSON.parse(request.responseText);
+                
+                var list = "<ul>";
+                
+                for(var i in arr)
+                    list += "<li>" + arr[i] + "</li>";
+                    list += "</ul>";
+                  
+                
+                  $("table").append("<tr><td>" + x + "</td><td>" + list + "</td></tr>");
+
+              }
+            };
+            request.open("GET", "http://mardby.se/AJK15G/lorem_json_array.php?numberOfWords=" + x);
+            request.send();
+          });
+
+      });
+
+    </script>
+    <style type="text/css">
+		th,td {
+			border: 1px solid lightgreen;
+		}
+	</style>
+  </head>
+  
+  <body>
+    <form>
+      <input type="text">
+      <button>Ladda JSON</button>
+    </form>
+    
+    
+    <table>
+      <tr><th>numberOfWords</th><th>responseText</th></tr>
+    </table>
+    
+    
+    
+    
+  </body>
+</html>

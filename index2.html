@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AJAX Test text 2</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  </head>
+  <body>
+    
+    <button>Ladda Data</button>
+    
+    <ul></ul>
+    
+    
+    
+    <script type="text/javascript">
+      
+      var request = new XMLHttpRequest();
+      
+      var handler = function(){
+        console.log("readyState: " + request.readyState);
+        console.log("status: " + request.status);
+        if(request.readyState===4 && request.status===200){
+          $("ul").append("<li>" + request.responseText + "</li>");
+        };
+      };
+      
+      
+      $(document).ready(function(){
+        
+        $('button').click(function(){
+          
+          request.onreadystatechange = handler;
+				request.open("GET", "http://mardby.se/AJK15G/lorem_text_random.php?numberOfWords=10");
+				request.send();
+          
+        });
+        
+      });
+        
+
+      
+           
+    </script>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AJAX JSON Övning 2</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript">
+      
+      $(document).ready(function(){
+        
+          $("button").click(function(evt){
+            
+            var x = $(this).text();
+            
+            var request = new XMLHttpRequest();
+            
+            request.onreadystatechange = function(){
+              if(request.readyState === 4 && request.status === 200) {
+                var arr = JSON.parse(request.responseText);
+                var list = "";
+
+                for (var i in arr)
+                  list += "<li>" + arr[i] + "</li>";
+                var thisUl = "#u" + x;
+                $(thisUl).html(list);
+                console.log(thisUl);
+                console.log(x);
+
+              }
+            }
+            request.open("GET", "http://mardby.se/AJK15G/lorem_json_array.php?numberOfWords=" + x);
+            request.send();
+          });
+
+      });
+
+    </script>
+    <style type="text/css">
+	   th,td {
+			border: 1px solid lightgreen;
+		}
+      button {
+        width: 100px;
+      }
+	</style>
+  </head>
+  
+  <body>
+    
+    <table>
+      <tr>
+        <td><button>1</button></td>
+        <td><button>2</button></td>
+        <td><button>3</button></td>
+        <td><button>4</button></td>
+        <td><button>5</button></td>
+      </tr>
+      <tr>
+        <td><ul id="u1"></ul></td>
+        <td><ul id="u2"></ul></td>
+        <td><ul id="u3"></ul></td>
+        <td><ul id="u4"></ul></td>
+        <td><ul id="u5"></ul></td>
+      </tr>
+    </table>
+    
+    
+    
+    
+  </body>
+</html>

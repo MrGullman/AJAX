@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AJAX Test</title>
+  </head>
+  <body>
+    <div id="here"></div>
+    
+    <script type="text/javascript">
+      
+      var request = new XMLHttpRequest();
+      
+      request.onreadystatechange = function() {
+
+			console.log("readyState:" + request.readyState);
+			console.log("status:" + request.status);
+			console.log("responseText:" + request.responseText);
+			console.log("-----");
+
+			if ((request.readyState===4) && (request.status===200)) {
+				document.getElementById('here').innerHTML = request.responseText;
+			}
+		}
+      
+      request.open("GET", "http://mardby.se/AJK15G/lorem_text.php");
+      
+      request.send();
+         
+      
+           
+    </script>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AJAX JSON Övning 4</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript">
+      
+      $(document).ready(function(){
+        
+          $("#blog-post").click(function(evt){
+            evt.preventDefault();
+
+            var request = new XMLHttpRequest();
+            
+            request.onreadystatechange = function(){
+              
+              if(request.readyState === 4 && request.status === 200) {
+
+                var blogPost = JSON.parse(request.responseText);
+                
+                console.log(blogPost.about);
+                
+              $(".blog-posts").append("<h2>" + blogPost.author + "</h2>");
+                
+              }
+
+            }
+            request.open("GET", "http://mardby.se/AJK15G/simple_json.php");
+            request.send();
+          });
+
+      });
+
+    </script>
+    <style type="text/css">
+      header {
+        display: flex;
+        display: block;
+        height: 50px;
+        background: #999;
+      }
+      
+      #about, #author {
+	    color: #fff;
+        text-align: right;
+        padding-top: 1em;
+        padding-right: 1em;
+        font-weight: 600;
+        font-family: sans-serif;
+        cursor: pointer;
+        float: right;
+      }
+	</style>
+  </head>
+  
+  <body>
+    
+    <header>
+      <div id="about">About</div>
+      <div id="author">Author</div>
+      <div id="blog-post">BlogPosts</div>
+    </header>
+    <section>
+      <div class="author-content"></div>
+    </section>
+    <section>
+      <div class="about-content"></div>
+    </section>
+    <section>
+      <div class="blog-posts"></div>
+    </section>
+    
+  </body>
+</html>

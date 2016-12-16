@@ -21,24 +21,31 @@
                 
                 console.log(blogPost);
                 
-                
+                for(var i in blogPost){
+                  $(".blog-posts").append("<div>" +
+                        "<h2>" + blogPost[i].title + "</h2>" +
+                        "<em>" + blogPost[i].date + "</em>" +
+                        "<p>" + blogPost[i].text + "</p>" +
+                        "<ul>" + blogPost[i].tags + "</ul>" +
+                        "</div>");
+                  
+                }
                 
                 for(var i in blogPost){
                   $(".blog-posts").append("<div>" +
                        "<h2>" + blogPost[i].title + "</h2>" +
                         "<em>" + blogPost[i].date + "</em>" +
                         "<p>" + blogPost[i].text + "</p>" +
+                        "<ul>");
+                        
+                        for(var k in blogPost){
+                          console.log(blogPost[k].tags[k]);
+                          // här
+                        $(".blog-posts").append("</ul>" +
                         "</div>");
-                      
-                  
-                    for(var j in blogPost[j].tags){
-                      for(var k in blogPost[j].tags[k]){
-                        $(".blog-posts").append("<ul>" + 
-                          "<li>" + blogPost[k].tags + "</li>" +
-                          "</ul>");
-                      }
-                    }
-                    
+
+                        }
+                        
                 }
                 
               }

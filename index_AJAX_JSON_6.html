@@ -26,27 +26,16 @@
                         "<h2>" + blogPost[i].title + "</h2>" +
                         "<em>" + blogPost[i].date + "</em>" +
                         "<p>" + blogPost[i].text + "</p>" +
-                        "<ul>" + blogPost[i].tags + "</ul>" +
-                        "</div>");
-                  
-                }
-                
-                for(var i in blogPost){
-                  $(".blog-posts").append("<div>" +
-                       "<h2>" + blogPost[i].title + "</h2>" +
-                        "<em>" + blogPost[i].date + "</em>" +
-                        "<p>" + blogPost[i].text + "</p>" +
+               
                         "<ul>");
-                        
-                        for(var k in blogPost){
-                          console.log(blogPost[k].tags[k]);
-                          // här
-                        $(".blog-posts").append("</ul>" +
-                        "</div>");
-
-                        }
-                        
-                }
+                
+                  for(var j in blogPost[i].tags){
+                  $(".blog-posts").append(
+                        "<li>" + blogPost[i].tags[j] + "</li>");
+                   }
+                  $(".blog-posts").append("</ul>" +
+                      "</div>");
+                }  
                 
               }
 

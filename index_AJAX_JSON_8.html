@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>AJAX JSON Övning 6</title>
+    <title>AJAX JSON Övning 8</title>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script type="text/javascript">
       
@@ -20,25 +20,26 @@
                 var blogPost = JSON.parse(request.responseText).blog_posts;
                 
                 console.log(blogPost);
+              
                 
                 for(var i in blogPost){
-                  $(".blog-posts").append("<div>" +
-                        "<h2>" + blogPost[i].title + "</h2>" +
-                        "<em>" + blogPost[i].date + "</em>" +
-                        "<p>" + blogPost[i].text + "</p>" +
-                        "<ul>");
+                  var post = "<div>" +
+                         "<h2>" + blogPost[i].title + "</h2>" +
+                         "<em>" + blogPost[i].date + "</em>" +
+                         "<p>" + blogPost[i].text + "</p>" +
+                         "<ul>";
                           for(var j in blogPost[i].tags){
-                          $(".blog-posts").append(
-                                "<li>" + blogPost[i].tags[j] + "</li>");
-                           }
-                        $(".blog-posts").append("</ul>" +
-                            "</div>");
-                  }  
+                            post += "<li>" + blogPost[i].tags[j] + "</li>";
+                          }
+
+                         post += "</ul></div>";
+                         $('.blog-posts').append(post);
+                }
                 
               }
 
             }
-            request.open("GET", "http://mardby.se/AJK15G/simple_json.php");
+            request.open("GET", "http://mardby.se/AJK15G/blog_json.php");
             request.send();
           });
 

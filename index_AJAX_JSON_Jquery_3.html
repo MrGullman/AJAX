@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AJAX med jQuery Övning 3</title>
+    <link rel="stylesheet" href="#">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    
+      $(document).ready(function() {
+        
+        $("button").click(function() {
+          
+          $.getJSON("http://mardby.se/AJK15G/blog_json.php",
+                   function(data) {
+            
+            $.each(data.blog_posts, function(i, obj) {
+              var post = "<article>"
+              post += "<h1>" + obj.title + "</h1>";
+              post += "<h2>" + obj.author + "</h2>";
+              post += "<em>" + obj.date + "</em>";
+              post += "<p>" + obj.text + "</p>";
+              post += "<ul>";
+              for(var i in obj.tags){
+                post += "<li>" + obj.tags[i] + "</li>";
+              }
+              post += "</ul></article>";
+              post += "<hr>";
+              /*console.dir(data.about);
+              console.dir(data.contact);
+              console.dir(obj);
+              console.dir(obj.title);
+              console.dir(obj.tags)
+              console.dir(i);*/
+              $("section").append(post);
+              
+            })
+            
+            $("article").addClass("posts");
+          
+          });
+          
+        });
+        
+      });
+    
+    </script>
+    <style>
+      body {
+        width: 100vw;
+        position: relative;
+      }
+      h1 {
+        font-size: 1.6rem;
+        margin: 0;
+        padding: 0;
+        text-transform: uppercase;
+      }
+      
+      h2 {
+        font-size: 1.2rem;
+        margin: 0;
+        padding: 0;
+        padding-top: 2px;
+      }
+      
+      p {
+        font-family: sans-serif;
+        font-size: 1rem;
+        color: #666;
+      }
+      
+      hr {
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+      }
+      
+      ul {
+        margin: 0 auto;
+        padding: 0px;
+        width: 50%;
+        border: 1px solid #666;
+        border-radius: 5px;
+        overflow: hidden;
+        
+      }
+      
+      li {
+        list-style: none;
+        margin: 0 auto;
+      }
+      
+      li:nth-child(odd) {
+        background-color: #999;
+        color: #fff;
+      }
+      
+      article {
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
+      }
+      
+      
+    </style>
+  </head>
+  <body>
+    <button>get Content</button>
+    <header>
+      <nav></nav>
+    </header>
+    <section></section>
+  </body>
+</html>
+

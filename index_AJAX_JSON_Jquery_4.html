@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AJAX med jQuery Övning 4</title>
+    <link rel="stylesheet" href="#">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    
+      $(document).ready(function() {
+        
+        $("button").click(function() {
+          
+          $.getJSON("http://mardby.se/AJK15G/employees_json.php",
+                   function(data) {
+            
+            $("#company").append("<h1>" + data.company.name + "</h1>");
+            $("#company").append("<h2>" + data.company.address + "</h2>");
+            $("#company").append("<em>" + data.company.website + "</em>");
+            
+            $.each(data.employees, function(i, employees) {
+              var employee = "<article>";
+              
+              employee += "<h3>" + employees.name + "</h3>";
+              employee += "<p>" + employees.email + "</p>";
+              employee += "<p>" + employees.employee_id + "</p>";
+              employee += "<p>" + employees.department + "</p>";
+              employee += "<p>" + employees.direct_number + "</p>";
+              employee += "<ul>";
+              
+                for(var i in employees.skills){
+                  employee += "<li>" + employees.skills[i] + "</li>";
+                }
+              
+              employee += "</ul>";
+              employee += "<p>" + employees.office.floor + "</p>";
+              employee += "<p>" + employees.office.number + "</p>";
+              employee += "<hr>";
+              
+              $("#employee").append(employee);
+            })
+            console.log(data);
+            
+            
+          
+          });
+          
+        });
+        
+      });
+    
+    </script>
+    <style>
+      body {
+        width: 100vw;
+        position: relative;
+      }
+      h1 {
+        font-size: 1.6rem;
+        margin: 0;
+        padding: 0;
+        text-transform: uppercase;
+      }
+      
+      h2 {
+        font-size: 1.2rem;
+        margin: 0;
+        padding: 0;
+        padding-top: 2px;
+      }
+      
+      p {
+        font-family: sans-serif;
+        font-size: 1rem;
+        color: #666;
+      }
+            
+      ul {
+        padding: 0px;
+        width: 50%;
+        border: 1px solid #666;        
+      }
+      
+      li {
+        list-style: none;
+      }
+      
+      li:nth-child(odd) {
+        background-color: #999;
+        color: #fff;
+      }
+      
+      li {
+        padding-left: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+      }
+      
+      article:nth-child(1) {
+        padding-top: 2rem;
+      }
+      
+      article:nth-child(1):before {
+        content: "Anställda";
+        color: #555;
+        font-size: 1.2rem;
+      }
+      
+      
+    </style>
+  </head>
+  <body>
+    <button>get Content</button>
+    <header>
+      <nav></nav>
+    </header>
+    <section id="company"></section>
+    <section id="employee"></section>
+  </body>
+</html>
+

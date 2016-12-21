@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AJAX med jQuery Övning 1</title>
+    <link rel="stylesheet" href="#">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    
+      $(document).ready(function() {
+        
+        $("button").click(function() {
+          
+          $.getJSON("http://mardby.se/AJK15G/lorem_json_array.php",
+          function(data) {
+            for(var i in data){
+              $("ul").append("<li>" + data[i] + "</li>");
+            }
+          });
+          
+        });
+        
+      });
+    
+    </script>
+  </head>
+  <body>
+    
+    <button>Get JSON</button>
+    <ul></ul>
+    
+  </body>
+</html>
+
